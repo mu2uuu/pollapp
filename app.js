@@ -11,10 +11,9 @@ app.set("View engin", "ejs");
 // ミドルウェア
 app.use(express.json());
 
-// ルート接続確認
-app.get("/", (req, res) => {
-  res.send("hello express");
-})
+// ダイナミックルート
+const router = express.Router();
+app.use("/", require("./routes/index.js"));
 
 // viewの接続確認
 app.get("/view", (req, res) => {

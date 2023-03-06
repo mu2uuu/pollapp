@@ -7,6 +7,11 @@
   <title>Document</title>
 </head>
 <body>
-  <%= locals.message %>
+  <% for (var item of results) { %>
+    <ul>
+      <div>idは：<%= item.topics_id %></div>
+      <li><%= item.title %></li>
+    </ul>
+  <% } %>
 </body>
 </html>

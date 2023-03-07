@@ -24,3 +24,6 @@ MySQLの接続情報
 
 ・mysql.config.js
 
+DBのデータベース名は任意
+
+SQLファイルはtmp配下に格納

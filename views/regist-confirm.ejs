@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <%- include("./_share/metadata.ejs") %>
+    <%- include("./_share/stylesheets.ejs") %>
+      <title>アンケート</title>
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <%- include("./_share/header.ejs") %>
+        <form action="/survey/regist/confirm" method="POST">
+          <div class="row mb-3">
+            <label for="nickname" class="col-sm-2 col-form-label">ニックネーム</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="nickname" name="nickname" value="<%= data.nickname %>">
+            </div>
+          </div>
+          <fieldset class="row mb-3">
+            <legend class="col-form-label col-sm-2 pt-0">一つ選んで下さい</legend>
+            <div class="col-sm-10">
+            </div>
+          </fieldset>
+          <div class="row mb-3">
+            <label for="prise" class="col-sm-2 col-form-label">欲しい景品</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="prise" name="prise" value="<%= data.prise %>">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">回答する</button>
+        </form>
+    </div>
+    <%- include("./_share/javascripts.ejs") %>
+  </main>
+</body>
+
+</html>

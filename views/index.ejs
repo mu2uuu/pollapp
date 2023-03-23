@@ -1,17 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
+
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <%- include("./_share/metadata.ejs") %>
+    <%- include("./_share/stylesheets.ejs") %>
+      <title>アンケート</title>
 </head>
+
 <body>
-  <% for (var item of results) { %>
-    <ul>
-      <div>idは：<%= item.topics_id %></div>
-      <li><%= item.title %></li>
-    </ul>
-  <% } %>
+  <main>
+    <h1 class="visually-hidden">ヒーローの実例</h1>
+
+    <div class="container">
+      <%- include("./_share/header.ejs") %>
+        <!-- 画像付きのレスポンシブな左揃えのヒーロー -->
+        <div class="col-xxl-8 px-4 py-5">
+          <div class="row flex-lg-row align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+              <canvas id="chart" width="400" height="400" data-ans0="0" data-ans1="1" data-ans2="2" data-ans3="1"
+                data-ans4="2" data-ans5="2">
+              </canvas>
+            </div>
+            <div class="col-lg-6">
+
+              <div class="row row-cols-1 g-1">
+                <% for (var item of results) { %>
+                  <div class="col">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title"><%- item.title %></h5>
+                        <a href="/survey/regist/<%= item.topics_id %>" class="btn btn-primary">回答する</a>
+                      </div>
+                    </div>
+                  </div>
+                  <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /画像付きのレスポンシブな左揃えのヒーロー -->
+    </div>
+    <%- include("./_share/javascripts.ejs") %>
+  </main>
 </body>
+
 </html>

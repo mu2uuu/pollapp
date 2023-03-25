@@ -11,29 +11,38 @@
   <main>
     <div class="container">
       <%- include("./_share/header.ejs") %>
-        <form action="/survey/regist/confirm" method="POST">
+        <form>
+          <input type="hidden" id="topicId" name="topicId" value="<%= topicId %>">
+          <input type="hidden" id="nickname" name="nickname" value="<%= data.nickname %>">
+          <input type="hidden" id="chose" name="chose" value="<%= data.chose %>">
+          <input type="hidden" id="comment" name="comment" value="<%= data.comment %>">
           <div class="row mb-3">
             <label for="nickname" class="col-sm-2 col-form-label">ニックネーム</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="nickname" name="nickname" value="<%= data.nickname %>">
+              <%= data.nickname %>
             </div>
           </div>
           <fieldset class="row mb-3">
             <legend class="col-form-label col-sm-2 pt-0">一つ選んで下さい</legend>
             <div class="col-sm-10">
+              <%= data.chose %>
             </div>
           </fieldset>
           <div class="row mb-3">
-            <label for="prise" class="col-sm-2 col-form-label">欲しい景品</label>
+            <label for="comment" class="col-sm-2 col-form-label">欲しい景品</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control" id="prise" name="prise" value="<%= data.prise %>">
+              <%= data.comment %>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">回答する</button>
+          <button type="submit" class="btn btn-primary" data-method="POST"
+            data-action="/survey/regist/<%= topicId %>">修正</button>
+          <button type="submit" class="btn btn-primary" data-method="POST"
+            data-action="/survey/regist/execute">回答する</button>
         </form>
     </div>
-    <%- include("./_share/javascripts.ejs") %>
   </main>
+  <%- include("./_share/javascripts.ejs") %>
+    <script type="text/javascript" src="/public/js/regist.js"></script>
 </body>
 
 </html>

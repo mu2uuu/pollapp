@@ -1,5 +1,5 @@
 SELECT
-  chose, comment, updated_at
+  chose, comment, nickname
 FROM
   comment
 WHERE

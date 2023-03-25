@@ -3,4 +3,6 @@ UPDATE
 SET
   agree = agree + 1
 WHERE
-  chose = '払いたくない！';
+  topics_id = ?
+AND
+  chose = ?;

@@ -1,5 +1,5 @@
 INSERT INTO
   comment
-(topics_id, chose, comment, updated_by)
+(topics_id, chose, comment, nickname)
   VALUES
-('1', '500円', 'VRしたい！', 'guest')
+(?, ?, ?, ?)

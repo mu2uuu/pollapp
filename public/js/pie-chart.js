@@ -1,24 +1,28 @@
 const ctx = document.getElementById('chart');
+const $chart = document.querySelector('#chart');
+let chose = $chart.dataset.chose;
+let agree = $chart.dataset.agree;
+
+// 配列で渡しても文字列で受け取ってしまっているので、配列に格納する
+chose = chose.split(',');
+agree = agree.split(',');
 
 const data = {
-  labels: [
-    'Red',
-    'Blue',
-    'Yellow'
-  ],
+  labels: chose,
   datasets: [{
-    label: 'My First Dataset',
-    data: [300, 50, 100],
-    backgroundColor: [
-      'rgb(255, 99, 132)',
-      'rgb(54, 162, 235)',
-      'rgb(255, 205, 86)'
-    ],
+    data: agree,
     hoverOffset: 4
   }]
 };
 
 new Chart(ctx, {
   type: 'pie',
-  data: data
+  data: data,
+  options: {
+    plugins: {
+      colorschemes: {
+        scheme: 'tableau.Tableau20'
+      }
+    }
+  }
 })

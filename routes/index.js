@@ -5,6 +5,8 @@ const { MySQLClient, sql } = require("../lib/database/client.js");
 router.get("/", async (req, res) => {
 
   let results;
+  let chose = ['答えたら', '結果が', '見れるよ']
+  let agree = ['123', '456', '789']
 
   try {
     results = await MySQLClient.executeQuery(
@@ -14,7 +16,7 @@ router.get("/", async (req, res) => {
   } catch (err) {
     res.send(err);
   }
-  res.render("./index.ejs", { results });
+  res.render("./index.ejs", { chose, agree, results });
 })
 
 module.exports = router;

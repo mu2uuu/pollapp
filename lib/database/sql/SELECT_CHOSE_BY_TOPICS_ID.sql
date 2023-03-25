@@ -1,5 +1,5 @@
 SELECT
-  chose
+  chose, agree
 FROM
   chose
 WHERE

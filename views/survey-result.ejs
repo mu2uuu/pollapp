@@ -13,27 +13,31 @@
 
     <div class="container">
       <%- include("./_share/header.ejs") %>
-        <div class="col-xxl-8 px-4 py-5">
+      <div class="col-xxl-8 px-4 py-5">
           <div class="row flex-lg-row align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
               <canvas id="chart" width="400" height="400" data-chose="<%= chose %>" data-agree="<%= agree %>">
               </canvas>
             </div>
             <div class="col-lg-6">
-
-              <div class="row row-cols-1 g-1">
-                <% for (let item of results) { %>
-                  <div class="col">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title"><%- item.title %></h5>
-                        <a href="/survey/regist/<%= item.topics_id %>" class="btn btn-primary">回答する</a>
-                      </div>
+              <div class="overflow-auto" style="max-height: 400px;">
+                <% for (let comment of comments) { %>
+                  <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                      <%= comment.chose %>
                     </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">
+                        <%= comment.comment %>
+                      </li>
+                      <li class="list-group-item">@<%= comment.nickname %>
+                      </li>
+                    </ul>
                   </div>
                   <% } %>
               </div>
             </div>
+
           </div>
         </div>
     </div>

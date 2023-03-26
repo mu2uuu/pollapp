@@ -1,4 +1,5 @@
 const express = require("express");
+const favicon = require("serve-favicon");
 const path = require("path");
 require("dotenv").config();
 const { MySQLClient, sql } = require("./lib/database/client.js");
@@ -11,6 +12,7 @@ app.set("View engin", "ejs");
 // ミドルウェア
 app.use(express.json());
 app.use("/public", express.static(path.join(__dirname, "/public")));
+app.use(favicon(path.join(__dirname, "/public/favicon.ico")));
 app.use(express.urlencoded({ extended: true }));
 
 // ダイナミックルート

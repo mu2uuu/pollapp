@@ -27,7 +27,6 @@ app.use((req, res, next) => {
 });
 app.use((err, req, res, next) => {
   res.status(500);
-  console.log(err);
   res.render("./500.ejs");
 });
 

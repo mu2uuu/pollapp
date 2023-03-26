@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <%- include("./_share/metadata.ejs") %>
+    <%- include("./_share/stylesheets.ejs") %>
+      <title>アンケート</title>
+</head>
+
+<body>
+  <main>
+    <h1 class="visually-hidden">ヒーローの実例</h1>
+
+    <div class="container">
+      <%- include("./_share/header.ejs") %>
+        <div class="px-4 py-5">
+          <div class="row flex-lg-row align-items-center g-5 py-5">
+            <div class="col-md-6 col-lg-6">
+              <canvas id="chart" width="400" height="400" data-chose="<%= chose %>" data-agree="<%= agree %>">
+              </canvas>
+            </div>
+            <div class="col-md-6 col-lg-6">
+
+              <div class="row row-cols-1 g-1">
+                <% for (let item of results) { %>
+                  <div class="col">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title"><%- item.title %></h5>
+                        <a href="/survey/regist/<%= item.topics_id %>" class="btn btn-primary">回答する</a>
+                      </div>
+                    </div>
+                  </div>
+                  <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <%- include("./_share/javascripts.ejs") %>
+  </main>
+</body>
+
+</html>

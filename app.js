@@ -2,7 +2,6 @@ const express = require("express");
 const favicon = require("serve-favicon");
 const path = require("path");
 require("dotenv").config();
-const { MySQLClient, sql } = require("./lib/database/client.js");
 const app = express();
 
 // 設定

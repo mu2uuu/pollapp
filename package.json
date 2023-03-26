@@ -4,6 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "prebuild": "rimraf ./dist/**/*",
+    "build": "pkg .",
     "start": "nodemon app.js"
   },
   "author": "",

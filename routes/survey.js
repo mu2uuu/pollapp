@@ -9,6 +9,24 @@ let createDate = function (req) {
   }
 }
 
+// トピック一覧を取得して表示
+router.get("/", async (req, res) => {
+
+  let results;
+  let chose = ['答えたら', '結果が', '見れるよ']
+  let agree = ['123', '456', '789']
+
+  try {
+    results = await MySQLClient.executeQuery(
+      await sql("SELECT_TOPICS"),
+      []
+    )
+  } catch (err) {
+    next(err);
+  }
+  res.render("./survey-top.ejs", { chose, agree, results });
+})
+
 // 回答(ホーム画面から遷移)
 router.get("/regist/:id(\\d+)", async (req, res, next) => {
   let id = req.params.id;

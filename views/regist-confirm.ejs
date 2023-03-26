@@ -11,33 +11,43 @@
   <main>
     <div class="container">
       <%- include("./_share/header.ejs") %>
-        <form>
-          <input type="hidden" id="topicId" name="topicId" value="<%= topicId %>">
-          <input type="hidden" id="nickname" name="nickname" value="<%= data.nickname %>">
-          <input type="hidden" id="chose" name="chose" value="<%= data.chose %>">
-          <input type="hidden" id="comment" name="comment" value="<%= data.comment %>">
+        <form class="pt-4">
           <div class="row mb-3">
             <label for="nickname" class="col-sm-2 col-form-label">ニックネーム</label>
             <div class="col-sm-10">
-              <%= data.nickname %>
+              <input type="text" class="form-control" value="<%= data.nickname %>" disabled>
             </div>
           </div>
           <fieldset class="row mb-3">
             <legend class="col-form-label col-sm-2 pt-0">一つ選んで下さい</legend>
             <div class="col-sm-10">
-              <%= data.chose %>
+              <% for (let item of chose) { %>
+                <div class="form-check">
+                  <input type="radio" class="form-check-input" name="chose" id="<%= item.chose %>"
+                    value="<%= item.chose %>" <%= (item.chose===data.chose ? 'checked' : '' ) %> disabled>
+                  <label for="<%= item.chose %>" class="form-check-label">
+                    <%= item.chose %>
+                  </label>
+                </div>
+                <% } %>
             </div>
           </fieldset>
           <div class="row mb-3">
             <label for="comment" class="col-sm-2 col-form-label">欲しい景品</label>
             <div class="col-sm-10">
-              <%= data.comment %>
+              <input type="text" class="form-control" value="<%= data.comment %>" disabled>
             </div>
           </div>
           <button type="submit" class="btn btn-primary" data-method="POST"
             data-action="/survey/regist/<%= topicId %>">修正</button>
           <button type="submit" class="btn btn-primary" data-method="POST"
             data-action="/survey/regist/execute">回答する</button>
+
+          <input type="hidden" id="topicId" name="topicId" value="<%= topicId %>">
+          <input type="hidden" id="nickname" name="nickname" value="<%= data.nickname %>">
+          <input type="hidden" id="chose" name="chose" value="<%= data.chose %>">
+          <input type="hidden" id="comment" name="comment" value="<%= data.comment %>">
+
         </form>
     </div>
   </main>

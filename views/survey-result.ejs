@@ -15,14 +15,14 @@
       <%- include("./_share/header.ejs") %>
       <div class="col-xxl-8 px-4 py-5">
           <div class="row flex-lg-row align-items-center g-5 py-5">
-            <div class="col-10 col-sm-8 col-lg-6">
+            <div class="col-md-6 col-lg-6">
               <canvas id="chart" width="400" height="400" data-chose="<%= chose %>" data-agree="<%= agree %>">
               </canvas>
             </div>
-            <div class="col-lg-6">
+            <div class="col-md-6 col-lg-6">
               <div class="overflow-auto" style="max-height: 400px;">
                 <% for (let comment of comments) { %>
-                  <div class="card" style="width: 18rem;">
+                  <div class="card mb-3">
                     <div class="card-header">
                       <%= comment.chose %>
                     </div>

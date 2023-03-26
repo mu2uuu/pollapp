@@ -47,10 +47,19 @@ router.post("/regist/:id(\\d+)", async (req, res, next) => {
 })
 
 // 確認
-router.post("/regist/confirm", (req, res, next) => {
+router.post("/regist/confirm", async (req, res, next) => {
   let { topicId } = req.body
   let data = createDate(req);
-  res.render("./regist-confirm.ejs", { topicId, data });
+  let chose;
+  try {
+    chose = await MySQLClient.executeQuery(
+      await sql("SELECT_CHOSE_BY_TOPICS_ID.sql"),
+      [topicId]
+    )
+  } catch (err) {
+    res.send(err);
+  }
+  res.render("./regist-confirm.ejs", { topicId, data, chose });
 })
 
 // 回答実行

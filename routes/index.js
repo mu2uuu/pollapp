@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
       []
     )
   } catch (err) {
-    res.send(err);
+    next(err);
   }
   res.render("./index.ejs", { chose, agree, results });
 })

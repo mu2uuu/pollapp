@@ -70,9 +70,25 @@ router.post("/regist/confirm", async (req, res, next) => {
 
 // 回答実行
 router.post("/regist/execute", async (req, res, next) => {
+  let topic, chose
   let { topicId } = req.body
   let data = createDate(req);
   try {
+
+    // 挿入前に不正パラメータでないか確認
+    topic = await MySQLClient.executeQuery(
+      await sql("SELECT_TOPICS_BY_TOPICS_ID.sql"),
+      [topicId]
+    )
+    chose = await MySQLClient.executeQuery(
+      await sql("SELECT_CHOSE_BY_TOPICS_ID_CHOSE.sql"),
+      [topicId, data.chose]
+    )
+
+    if(topic.length === 0 || chose.length === 0) {
+      next(err);
+    }
+
     await MySQLClient.executeQuery(
       await sql("INSERT_COMMENT.sql"),
       [topicId, data.chose, data.comment, data.nickname]

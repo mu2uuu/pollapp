@@ -23,11 +23,13 @@ router.get("/regist/:id(\\d+)", async (req, res, next) => {
       await sql("SELECT_CHOSE_BY_TOPICS_ID.sql"),
       [id]
     )
+
+    topicId = topic[0].topics_id
+    res.render("./survey-form.ejs", { topicId, data, chose });
+
   } catch (err) {
-    res.send(err);
+    next(err);
   }
-  topicId = topic[0].topics_id
-  res.render("./survey-form.ejs", { topicId, data, chose });
 })
 
 // 回答(確認画面から遷移)
@@ -40,10 +42,12 @@ router.post("/regist/:id(\\d+)", async (req, res, next) => {
       await sql("SELECT_CHOSE_BY_TOPICS_ID.sql"),
       [topicId]
     )
+
+    res.render("./survey-form.ejs", { topicId, data, chose });
+
   } catch (err) {
-    res.send(err);
+    next(err);
   }
-  res.render("./survey-form.ejs", { topicId, data, chose });
 })
 
 // 確認
@@ -56,10 +60,12 @@ router.post("/regist/confirm", async (req, res, next) => {
       await sql("SELECT_CHOSE_BY_TOPICS_ID.sql"),
       [topicId]
     )
+
+    res.render("./regist-confirm.ejs", { topicId, data, chose });
+
   } catch (err) {
-    res.send(err);
+    next(err);
   }
-  res.render("./regist-confirm.ejs", { topicId, data, chose });
 })
 
 // 回答実行
@@ -75,11 +81,12 @@ router.post("/regist/execute", async (req, res, next) => {
       await sql("UPDATE_AGREE_BY_CHOSE.sql"),
       [topicId, data.chose]
     )
+
+    res.redirect(`/survey/regist/complete?topicId=${topicId}`);
+
   } catch (err) {
     next(err);
-    return;
   }
-  res.redirect(`/survey/regist/complete?topicId=${topicId}`);
 })
 
 // 回答からのリダイレクト
@@ -90,6 +97,9 @@ router.get("/regist/complete", (req, res, next) => {
 // 結果
 router.get("/result/:topicId(\\d+)", async (req, res, next) => {
   let topicId = req.params.topicId;
+  let chose = [];
+  let agree = [];
+
   try {
     datas = await MySQLClient.executeQuery(
       await sql("SELECT_CHOSE_BY_TOPICS_ID.sql"),
@@ -99,17 +109,21 @@ router.get("/result/:topicId(\\d+)", async (req, res, next) => {
       await sql("SELECT_COMMENT_BY_TOPICS_ID.sql"),
       [topicId]
     )
+    
+    if(datas.length === 0 || comments.length === 0) {
+      throw new Error();
+    }
+
+    for (let data of datas) {
+      chose.push(data.chose)
+      agree.push(data.agree)
+    }
+
+    res.render("./survey-result.ejs", { chose, agree, comments });
+
   } catch (err) {
     next(err);
-    return;
   }
-  let chose = [];
-  let agree = [];
-  for (let data of datas) {
-    chose.push(data.chose)
-    agree.push(data.agree)
-  }
-  res.render("./survey-result.ejs", { chose, agree, comments });
 })
 
 module.exports = router;

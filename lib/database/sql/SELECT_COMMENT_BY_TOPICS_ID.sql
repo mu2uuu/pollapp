@@ -3,4 +3,4 @@ SELECT
 FROM
   comment
 WHERE
-  topics_id = 1
+  topics_id = ?

@@ -9,12 +9,10 @@
 
 <body>
   <main>
-    <h1 class="visually-hidden">ヒーローの実例</h1>
-
     <div class="container">
       <%- include("./_share/header.ejs") %>
-        <div class="px-4 py-5">
-          <div class="row flex-lg-row align-items-center g-5 py-5">
+        <div class="px-4 py-2">
+          <div class="row flex-lg-row align-items-center g-5">
             <div class="col-md-6 col-lg-6">
               <canvas id="chart" width="400" height="400" data-chose="<%= chose %>" data-agree="<%= agree %>">
               </canvas>

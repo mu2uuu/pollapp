@@ -1,6 +1,7 @@
 SELECT
   topics_id,
-  title
+  title,
+  comment_title
 FROM
   topics
 WHERE

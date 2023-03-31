@@ -43,7 +43,8 @@ router.get("/regist/:id(\\d+)", async (req, res, next) => {
     )
 
     topicId = topic[0].topics_id
-    res.render("./survey-form.ejs", { topicId, data, chose });
+    commentTitle = topic[0].comment_title
+    res.render("./survey-form.ejs", { topicId, commentTitle, data, chose });
 
   } catch (err) {
     next(err);

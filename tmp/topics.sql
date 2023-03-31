@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `topics` (
   `topics_id` int(10) UNSIGNED NOT NULL COMMENT 'トピックID',
   `title` varchar(30) NOT NULL,
+  `comment_title` varchar(30) DEFAULT 'コメント' NOT NULL,
   `updated_by` varchar(20) NOT NULL,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -38,9 +39,9 @@ CREATE TABLE `topics` (
 -- テーブルのデータのダンプ `topics`
 --
 
-INSERT INTO `topics` (`topics_id`, `title`, `updated_by`, `updated_at`) VALUES
-(1, 'ビンゴの景品代、いくらまでならありですか？', 'admin', '2023-03-05 14:42:20'),
-(2, '明日の天気はどうでしょう？', 'admin', '2023-03-06 14:21:31');
+INSERT INTO `topics` (`topics_id`, `title`, `comment_title`, `updated_by`, `updated_at`) VALUES
+(1, 'ビンゴの景品代、いくらまでならありですか？', '欲しい景品',  'admin', '2023-03-05 14:42:20'),
+(2, '明日の天気はどうでしょう？', 'コメント',  'admin', '2023-03-06 14:21:31');
 
 --
 -- ダンプしたテーブルのインデックス

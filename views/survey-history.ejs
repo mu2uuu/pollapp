@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <%- include("./_share/metadata.ejs") %>
+    <%- include("./_share/stylesheets.ejs") %>
+      <title>アンケート</title>
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <%- include("./_share/header.ejs") %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">改版内容</th>
+            <th scope="col">日付</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>回答画面のバリデーション対応</td>
+            <td>2023/4/2</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>回答画面「コメント」の表示文言の可変化対応(DB管理)</td>
+            <td>2023/3/31</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>AWSへ初回リリース</td>
+            <td>2023/3/27</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <%- include("./_share/javascripts.ejs") %>
+  </main>
+</body>
+
+</html>

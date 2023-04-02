@@ -161,4 +161,9 @@ router.get("/result/:topicId(\\d+)", async (req, res, next) => {
   }
 })
 
+// 改版履歴画面
+router.get("/history", async (req, res) => {
+  res.render("./survey-history.ejs");
+})
+
 module.exports = router;

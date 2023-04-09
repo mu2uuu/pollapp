@@ -10,7 +10,7 @@ let createDate = function (req) {
 }
 
 // トピック一覧を取得して表示
-router.get("/", async (res, next) => {
+router.get("/", async (req, res, next) => {
 
   let results;
   let chose = ['答えたら', '結果が', '見れるよ']
@@ -125,7 +125,7 @@ router.post("/regist/execute", async (req, res, next) => {
 })
 
 // 回答からのリダイレクト
-router.get("/regist/complete", (req, res) => {
+router.get("/regist/complete", (req, res, next) => {
   res.render("./regist-complete.ejs", { topicId: req.query.topicId });
 })
 
@@ -162,7 +162,7 @@ router.get("/result/:topicId(\\d+)", async (req, res, next) => {
 })
 
 // 改版履歴画面
-router.get("/history", async (res) => {
+router.get("/history", async (req, res) => {
   res.render("./survey-history.ejs");
 })
 

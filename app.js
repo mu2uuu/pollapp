@@ -1,5 +1,6 @@
 const express = require("express");
 const favicon = require("serve-favicon");
+const accesslogger = require("./lib/log/accesslogger.js");
 const path = require("path");
 require("dotenv").config();
 const app = express();
@@ -8,10 +9,15 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("View engin", "ejs");
 
-// ミドルウェア
-app.use(express.json());
+// 静的資材ルーティング
 app.use("/public", express.static(path.join(__dirname, "/public")));
 app.use(favicon(path.join(__dirname, "/public/favicon.ico")));
+
+// アクセスログ
+app.use(accesslogger());
+
+// ミドルウェア
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // ダイナミックルート

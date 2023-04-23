@@ -9,6 +9,24 @@ let createDate = function (req) {
   }
 }
 
+let validateData = function(data, commentTitle) {
+  let isValid = true;
+  let error = {};
+  if(!data.nickname || !data.nickname.match(/\S/g)){
+    isValid = false;
+    error.nickname = "ニックネームは空白ダメです";
+  }
+  if(!data.comment || !data.comment.match(/\S/g)) {
+    isValid = false;
+    error.comment = commentTitle + "は空白ダメです";
+  }
+
+  if(isValid) {
+    return undefined;
+  }
+  return error;
+}
+
 // トピック一覧を取得して表示
 router.get("/", async (req, res, next) => {
 
@@ -75,10 +93,23 @@ router.post("/regist/confirm", async (req, res, next) => {
   let data = createDate(req);
   let chose;
   try {
+    topic = await MySQLClient.executeQuery(
+      await sql("SELECT_TOPICS_BY_TOPICS_ID.sql"),
+      [topicId]
+    )
+    commentTitle = topic[0].comment_title
+    
     chose = await MySQLClient.executeQuery(
       await sql("SELECT_CHOSE_BY_TOPICS_ID.sql"),
       [topicId]
     )
+
+    // バリデーションチェック
+    let error = validateData(data, commentTitle);
+    if(error) {
+      res.render("./survey-form.ejs", { error, topicId, data, chose});
+      return;
+    }
 
     res.render("./regist-confirm.ejs", { topicId, data, chose });
 
@@ -159,11 +190,6 @@ router.get("/result/:topicId(\\d+)", async (req, res, next) => {
   } catch (err) {
     next(err);
   }
-})
-
-// 改版履歴画面
-router.get("/history", async (req, res) => {
-  res.render("./survey-history.ejs");
 })
 
 module.exports = router;
